@@ -46,6 +46,7 @@ namespace Vidly.Controllers
             return Content("Id: " + movieID);
 
         }
+        [Route("movies/Index/{year}/{month:regex(\\d{2}):range(1,12)}")]
         public ActionResult Index(int? pageIndex, string sortBy)
         {
             if (false == pageIndex.HasValue)
@@ -57,7 +58,6 @@ namespace Vidly.Controllers
                 sortBy = "Name";
             }
             return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
-
         }
         //attribute routes
         //constraints: min,max,minlength,maxlengthint,float,guid
@@ -67,5 +67,23 @@ namespace Vidly.Controllers
         {
             return Content(year + "/" + month);
         }
+        //mvcaction4 + tab   -->creates action pattern
+
+        [Route("Movies/Index")]
+        public ActionResult Index()
+        {
+            var movies = GetMovies();
+            var viewModel = new IndexMoviesViewModel() {Movies = movies};
+            return View(viewModel);
+        }
+        private IEnumerable<Movie> GetMovies()
+        {
+            return new List<Movie>
+            {
+                new Movie { Id = 1, Name = "Shrek" },
+                new Movie { Id = 2, Name = "Wall-e" }
+            };
+        }
+
     }
 }
