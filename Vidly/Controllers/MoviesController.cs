@@ -11,15 +11,16 @@ namespace Vidly.Controllers
     public class MoviesController : Controller
     {
         // GET: Movies/Random
-        //public ActionResult Random()
-        //{
-        //    var movie = new Movie() {Name = "Shrek"};
-        //    //return View(movie);
-        //    //return Content("Hello World");
-        //    //return HttpNotFound();
-        //    //return new EmptyResult();
-        //    return RedirectToAction("Index", "Home", new {page = 1, sortBy = "name"});
-        //}
+        [Route("movies/test/{year:regex(2014|2015)}/{month:regex(\\d{2}):range(1,12)}")]
+        public ActionResult Test()
+        {
+            var movie = new Movie() { Name = "Shrek" };
+            //return View(movie);
+            //return Content("Hello World");
+            return HttpNotFound();
+            //return new EmptyResult();
+            //return RedirectToAction("Index", "Home", new { page = 1, sortBy = "name" });
+        }
         public ActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek" };

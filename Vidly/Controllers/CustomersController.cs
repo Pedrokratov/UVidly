@@ -10,6 +10,18 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
+        private ApplicationDbContext _context;
+        public CustomersController()
+        {
+                this._context=new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            this._context.Dispose();
+        }
+
         // GET: Customers
         public ActionResult Index()
         {
@@ -26,7 +38,7 @@ namespace Vidly.Controllers
         }
         private IEnumerable<Customer> GetCustomers()
         {
-            return  new List<Customer>();
+            //return  new List<Customer>();
             return new List<Customer>
             {
                 new Customer { Id = 1, Name = "John Smith" },
